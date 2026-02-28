@@ -1,0 +1,163 @@
+
+> pokeca-map@1.0.0 dev
+> vite --host --port 5174
+
+
+  VITE v7.3.1  ready in 1285 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: http://192.168.0.22:5174/
+  ➜  press h + enter to show help
+8:16:40 [vite] Internal server error: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx: Expected corresponding JSX closing tag for <>. (468:8)
+
+  466 |                 </div>
+  467 |             )}
+> 468 |         </div >
+      |         ^
+  469 |         </>
+  470 |     );
+  471 | }
+  Plugin: vite:react-babel
+  File: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx:468:8
+  466 |                  </div>
+  467 |              )}
+  468 |          </div >
+      |          ^
+  469 |          </>
+  470 |      );
+      at constructor (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:365:19)
+      at JSXParserMixin.raise (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:6599:19)
+      at JSXParserMixin.jsxParseElementAt (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4720:14)
+      at JSXParserMixin.jsxParseElement (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4749:17)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4759:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11081:23)
+      at JSXParserMixin.parseUpdate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11066:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11046:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10899:61)
+      at JSXParserMixin.parseExprOps (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10904:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10881:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10800:39
+      at JSXParserMixin.allowInAnd (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12426:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10800:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12493:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11675:28)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11331:23)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4764:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11081:23)
+      at JSXParserMixin.parseUpdate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11066:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11046:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10899:61)
+      at JSXParserMixin.parseExprOps (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10904:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10881:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10831:21)
+      at JSXParserMixin.parseExpressionBase (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10784:23)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10780:39
+      at JSXParserMixin.allowInAnd (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12421:16)
+      at JSXParserMixin.parseExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10780:17)
+      at JSXParserMixin.parseReturnStatement (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13142:28)
+      at JSXParserMixin.parseStatementContent (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12798:21)
+      at JSXParserMixin.parseStatementLike (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12767:17)
+      at JSXParserMixin.parseStatementListItem (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12747:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13316:61)
+      at JSXParserMixin.parseBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13309:10)
+      at JSXParserMixin.parseBlock (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13297:10)
+      at JSXParserMixin.parseFunctionBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12100:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12086:10)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13445:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12403:14)
+      at JSXParserMixin.parseFunction (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13444:10)
+      at JSXParserMixin.parseExportDefaultExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13907:19)
+      at JSXParserMixin.parseExport (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13828:25)
+      at JSXParserMixin.parseStatementContent (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12878:27)
+      at JSXParserMixin.parseStatementLike (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12767:17)
+      at JSXParserMixin.parseModuleItem (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12744:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13316:36)
+      at JSXParserMixin.parseBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13309:10)
+      at JSXParserMixin.parseProgram (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12622:10)
+8:16:40 [vite] (client) Pre-transform error: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx: Expected corresponding JSX closing tag for <>. (468:8)
+
+  466 |                 </div>
+  467 |             )}
+> 468 |         </div >
+      |         ^
+  469 |         </>
+  470 |     );
+  471 | }
+  Plugin: vite:react-babel
+  File: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx:468:8
+  466 |                  </div>
+  467 |              )}
+  468 |          </div >
+      |          ^
+  469 |          </>
+  470 |      );
+8:20:44 [vite] Internal server error: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx: Expected corresponding JSX closing tag for <>. (468:8)
+
+  466 |                 </div>
+  467 |             )}
+> 468 |         </div >
+      |         ^
+  469 |         </>
+  470 |     );
+  471 | }
+  Plugin: vite:react-babel
+  File: /Users/ryotaasai/pokeca-map/src/components/GachiMode.jsx:468:8
+  466 |                  </div>
+  467 |              )}
+  468 |          </div >
+      |          ^
+  469 |          </>
+  470 |      );
+      at constructor (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:365:19)
+      at JSXParserMixin.raise (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:6599:19)
+      at JSXParserMixin.jsxParseElementAt (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4720:14)
+      at JSXParserMixin.jsxParseElement (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4749:17)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4759:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11081:23)
+      at JSXParserMixin.parseUpdate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11066:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11046:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10899:61)
+      at JSXParserMixin.parseExprOps (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10904:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10881:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10800:39
+      at JSXParserMixin.allowInAnd (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12426:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10800:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12493:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11675:28)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11331:23)
+      at JSXParserMixin.parseExprAtom (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:4764:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11081:23)
+      at JSXParserMixin.parseUpdate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11066:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:11046:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10899:61)
+      at JSXParserMixin.parseExprOps (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10904:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10881:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10831:21)
+      at JSXParserMixin.parseExpressionBase (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10784:23)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10780:39
+      at JSXParserMixin.allowInAnd (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12421:16)
+      at JSXParserMixin.parseExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:10780:17)
+      at JSXParserMixin.parseReturnStatement (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13142:28)
+      at JSXParserMixin.parseStatementContent (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12798:21)
+      at JSXParserMixin.parseStatementLike (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12767:17)
+      at JSXParserMixin.parseStatementListItem (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12747:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13316:61)
+      at JSXParserMixin.parseBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13309:10)
+      at JSXParserMixin.parseBlock (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13297:10)
+      at JSXParserMixin.parseFunctionBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12100:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12086:10)
+      at /Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13445:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12403:14)
+      at JSXParserMixin.parseFunction (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13444:10)
+      at JSXParserMixin.parseExportDefaultExpression (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13907:19)
+      at JSXParserMixin.parseExport (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13828:25)
+      at JSXParserMixin.parseStatementContent (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12878:27)
+      at JSXParserMixin.parseStatementLike (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12767:17)
+      at JSXParserMixin.parseModuleItem (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12744:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13316:36)
+      at JSXParserMixin.parseBlockBody (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:13309:10)
+      at JSXParserMixin.parseProgram (/Users/ryotaasai/pokeca-map/node_modules/@babel/parser/lib/index.js:12622:10)
+8:43:36 [vite] (client) hmr update /src/components/PokeMap.jsx
+8:44:44 [vite] (client) hmr update /src/index.css

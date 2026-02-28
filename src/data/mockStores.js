@@ -1,873 +1,219 @@
-// 愛知県（名古屋市周辺）のモックデータ
-// category: 'yodobashi', 'geo', 'aeon', 'conveni', 'pokemon-center', 'other'
+// 名古屋市東区のコンビニエンスストアを中心とした実在店舗データ
+// category: 'conveni', 'other'
 // status: 'in-stock', 'low-stock', 'out-of-stock', 'unknown'
-//   in-stock = 在庫あり (green)
-//   low-stock = 残りわずか (orange)
-//   out-of-stock / unknown = 未確認・在庫なし (gray)
+//   in-stock = 在庫あり
+//   low-stock = 残りわずか
+//   out-of-stock / unknown = 未確認・在庫なし
 // packLimit: null | number — ()パック限（購入制限）
 
 export const mockStores = [
+    // --- 東区：代官町・泉・葵エリア ---
     {
         id: 1,
-        name: 'ヨドバシカメラ マルチメディア名古屋松坂屋店',
-        category: 'yodobashi',
-        lat: 35.1633,
-        lng: 136.9075,
+        name: 'セブン-イレブン 名古屋代官町店',
+        category: 'conveni',
+        lat: 35.174867,
+        lng: 136.921572,
         status: 'in-stock',
-        packLimit: null,
-        history: [{ status: 'in-stock', memo: 'レジ裏にプロモパックあり', packLimit: null }]
+        packLimit: 2,
+        history: [{ status: 'in-stock', memo: 'レジ横に2パック限であり', packLimit: 2, timestamp: new Date(Date.now() - 3600000).toISOString() }]
     },
     {
         id: 2,
-        name: 'ゲオ 名古屋大須店',
-        category: 'geo',
-        lat: 35.1595,
-        lng: 136.9052,
-        status: 'out-of-stock',
-        packLimit: null,
-        history: [{ status: 'out-of-stock', memo: '次回の入荷は未定とのこと', packLimit: null }]
+        name: 'ファミリーマート 代官町東店',
+        category: 'conveni',
+        lat: 35.176081,
+        lng: 136.924757,
+        status: 'low-stock',
+        packLimit: 5,
+        history: [{ status: 'low-stock', memo: '残り数パックでした。5パック限。', packLimit: 5, timestamp: new Date(Date.now() - 7200000).toISOString() }]
     },
     {
         id: 3,
-        name: 'イオンモール熱田',
-        category: 'aeon',
-        lat: 35.1362,
-        lng: 136.9065,
-        status: 'in-stock',
-        packLimit: 3,
-        history: [{ status: 'in-stock', memo: 'お一人様3パックまで', packLimit: 3 }]
-    },
-    {
-        id: 4,
-        name: 'セブン-イレブン 名古屋栄３丁目店',
+        name: 'ローソン 東区代官町店',
         category: 'conveni',
-        lat: 35.1668,
-        lng: 136.9044,
+        lat: 35.174531,
+        lng: 136.920747,
         status: 'unknown',
         packLimit: null,
         history: []
     },
     {
-        id: 5,
-        name: 'ファミリーマート 錦三丁目店',
+        id: 4,
+        name: 'セブン-イレブン 名古屋葵3丁目東店',
         category: 'conveni',
-        lat: 35.1729,
-        lng: 136.9038,
+        lat: 35.17176,
+        lng: 136.931118,
+        status: 'out-of-stock',
+        packLimit: null,
+        history: [{ status: 'out-of-stock', memo: '売り切れ', packLimit: null, timestamp: new Date(Date.now() - 86400000).toISOString() }]
+    },
+    {
+        id: 5,
+        name: 'ファミリーマート 葵店',
+        category: 'conveni',
+        lat: 35.171008,
+        lng: 136.920238,
         status: 'in-stock',
-        packLimit: 2,
-        history: [{ status: 'in-stock', memo: 'シャイニートレジャーex入荷中', packLimit: 2 }]
+        packLimit: 3,
+        history: [{ status: 'in-stock', memo: '深夜に入荷した模様', packLimit: 3, timestamp: new Date(Date.now() - 14400000).toISOString() }]
     },
     {
         id: 6,
-        name: 'カードショップ 大須トレカ',
-        category: 'other',
-        lat: 35.1578,
-        lng: 136.9022,
-        status: 'low-stock',
-        packLimit: 3,
-        history: [
-            { status: 'low-stock', memo: '1人3パックまで', packLimit: 3 },
-            { status: 'in-stock', memo: 'ボックス入荷しました', packLimit: null }
-        ]
+        name: 'セブン-イレブン 名古屋泉1丁目店',
+        category: 'conveni',
+        lat: 35.1763,
+        lng: 136.9112,
+        status: 'unknown',
+        packLimit: null,
+        history: []
     },
     {
         id: 7,
-        name: 'ポケモンセンター ナゴヤ',
-        category: 'pokemon-center',
-        lat: 35.1706,
-        lng: 136.8816,
+        name: 'セブン-イレブン 名古屋泉2丁目店',
+        category: 'conveni',
+        lat: 35.1775,
+        lng: 136.9165,
         status: 'in-stock',
         packLimit: null,
-        history: [{ status: 'in-stock', memo: '最新弾まだあります', packLimit: null }]
+        history: [{ status: 'in-stock', memo: '箱で置いてありました', packLimit: null, timestamp: new Date(Date.now() - 1800000).toISOString() }]
     },
     {
         id: 8,
-        name: 'ビックカメラ 名古屋駅西店',
-        category: 'yodobashi',
-        lat: 35.1709,
-        lng: 136.8822,
+        name: 'セブン-イレブン 名古屋泉3丁目店',
+        category: 'conveni',
+        lat: 35.1768,
+        lng: 136.9205,
         status: 'out-of-stock',
         packLimit: null,
+        history: [{ status: 'out-of-stock', memo: '次回の入荷は未定とのこと', packLimit: null, timestamp: new Date(Date.now() - 43200000).toISOString() }]
     },
-    // --- 愛知県東区（ナゴヤドーム・大曽根周辺）の追加データ ---
     {
-        "id": 17,
-        "name": "ミニストップ 名古屋古出来店",
-        "category": "conveni",
-        "lat": 35.1771,
-        "lng": 136.9453,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "8時間前",
-                "timestamp": "2026-02-21T18:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
+        id: 9,
+        name: 'ローソン 東区泉三丁目店内',
+        category: 'conveni',
+        lat: 35.1755,
+        lng: 136.9215,
+        status: 'unknown',
+        packLimit: null,
+        history: []
+    },
+
+    // --- 東区：大曽根・矢田・ナゴヤドーム周辺エリア ---
+    {
+        id: 10,
+        name: 'ファミリーマート 大幸一丁目店',
+        category: 'conveni',
+        lat: 35.192357,
+        lng: 136.946714,
+        status: 'low-stock',
+        packLimit: 1,
+        history: [{ status: 'low-stock', memo: 'レジ裏にプロモパックあり・1パックのみ', packLimit: 1, timestamp: new Date(Date.now() - 2700000).toISOString() }]
+    },
+    {
+        id: 11,
+        name: 'ローソン 東区矢田五丁目店',
+        category: 'conveni',
+        lat: 35.191554,
+        lng: 136.942255,
+        status: 'in-stock',
+        packLimit: 10,
+        history: [{ status: 'in-stock', memo: '10パック限で販売中', packLimit: 10, timestamp: new Date(Date.now() - 5000000).toISOString() }]
+    },
+    {
+        id: 12,
+        name: 'ファミリーマート 名古屋東大曽根店',
+        category: 'conveni',
+        lat: 35.185901,
+        lng: 136.93652,
+        status: 'out-of-stock',
+        packLimit: null,
+        history: [{ status: 'out-of-stock', memo: '売り切れ。', packLimit: null, timestamp: new Date(Date.now() - 18000000).toISOString() }]
+    },
+    {
+        id: 13,
+        name: 'セブン-イレブン 名古屋新出来2丁目店',
+        category: 'conveni',
+        lat: 35.1855,
+        lng: 136.9385,
+        status: 'in-stock',
+        packLimit: 5,
+        history: [{ status: 'in-stock', memo: '在庫あり', packLimit: 5, timestamp: new Date(Date.now() - 1200000).toISOString() }]
+    },
+    {
+        id: 14,
+        name: 'セブン-イレブン 名古屋徳川2丁目店',
+        category: 'conveni',
+        lat: 35.1850,
+        lng: 136.9280,
+        status: 'unknown',
+        packLimit: null,
+        history: []
+    },
+
+    // --- 東区：車道・筒井エリア ---
+    {
+        id: 15,
+        name: 'ミニストップ 車道店',
+        category: 'conveni',
+        lat: 35.173954,
+        lng: 136.92834,
+        status: 'in-stock',
+        packLimit: 3,
+        history: [{ status: 'in-stock', memo: '在庫あり。', packLimit: 3, timestamp: new Date(Date.now() - 800000).toISOString() }]
+    },
+    {
+        id: 16,
+        name: 'セブン-イレブン 名古屋筒井町4丁目店',
+        category: 'conveni',
+        lat: 35.1755,
+        lng: 136.9280,
+        status: 'low-stock',
+        packLimit: 2,
+        history: [{ status: 'low-stock', memo: '残りわずか', packLimit: 2, timestamp: new Date(Date.now() - 4000000).toISOString() }]
+    },
+
+    // --- ドラッグストア・その他東区エリア ---
+    {
+        id: 17,
+        name: 'スギ薬局 代官町店',
+        category: 'other',
+        lat: 35.1756,
+        lng: 136.9220,
+        status: 'out-of-stock',
+        packLimit: null,
+        history: [{ status: 'out-of-stock', memo: 'おもちゃ売り場扱いなし', packLimit: null, timestamp: new Date(Date.now() - 86400000).toISOString() }]
+    },
+    {
+        id: 18,
+        name: 'スギドラッグ 砂田橋店',
+        category: 'other',
+        lat: 35.1880,
+        lng: 136.9530,
+        status: 'in-stock',
+        packLimit: 1,
+        history: [{ status: 'in-stock', memo: '1人1パックまで', packLimit: 1, timestamp: new Date(Date.now() - 2500000).toISOString() }]
+    },
+    {
+        id: 19,
+        name: 'イオンモールナゴヤドーム前',
+        category: 'other',
+        lat: 35.187111,
+        lng: 136.944222,
+        status: 'out-of-stock',
+        packLimit: null,
+        history: [{ status: 'out-of-stock', memo: '売り切れ', packLimit: null, timestamp: new Date(Date.now() - 18000000).toISOString() }]
+    },
+    {
+        id: 20,
+        name: 'TSUTAYA バロー砂田橋店',
+        category: 'other',
+        lat: 35.1885,
+        lng: 136.9540,
+        status: 'in-stock',
+        packLimit: null,
+        history: [
+            { status: 'in-stock', memo: 'カード売り場に潤沢に在庫あり', packLimit: null, timestamp: new Date(Date.now() - 600000).toISOString() }
         ]
-    },
-    {
-        "id": 18,
-        "name": "ミニストップ 名古屋泉店",
-        "category": "conveni",
-        "lat": 35.1857,
-        "lng": 136.9453,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "16時間前",
-                "timestamp": "2026-02-21T10:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 19,
-        "name": "ミニストップ 名古屋徳川店",
-        "category": "conveni",
-        "lat": 35.1723,
-        "lng": 136.9458,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "2時間前",
-                "timestamp": "2026-02-22T00:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 20,
-        "name": "ローソン 名古屋矢田店",
-        "category": "conveni",
-        "lat": 35.1987,
-        "lng": 136.9494,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "7時間前",
-                "timestamp": "2026-02-13T19:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 21,
-        "name": "スギ薬局 ナゴヤドーム前店",
-        "category": "other",
-        "lat": 35.1947,
-        "lng": 136.9394,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "8時間前",
-                "timestamp": "2026-02-21T18:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 22,
-        "name": "ローソン 名古屋葵店",
-        "category": "conveni",
-        "lat": 35.1998,
-        "lng": 136.9335,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 23,
-        "name": "ファミリーマート 名古屋新出来店",
-        "category": "conveni",
-        "lat": 35.1953,
-        "lng": 136.9512,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 24,
-        "name": "ミニストップ 名古屋代官町店",
-        "category": "conveni",
-        "lat": 35.1743,
-        "lng": 136.9389,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 25,
-        "name": "ミニストップ 名古屋徳川店",
-        "category": "conveni",
-        "lat": 35.1806,
-        "lng": 136.9373,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "22時間前",
-                "timestamp": "2026-02-21T04:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 26,
-        "name": "ローソン 名古屋葵店",
-        "category": "conveni",
-        "lat": 35.1968,
-        "lng": 136.9507,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "23時間前",
-                "timestamp": "2026-02-13T03:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 27,
-        "name": "セブン-イレブン 名古屋筒井店",
-        "category": "conveni",
-        "lat": 35.1872,
-        "lng": 136.9344,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 28,
-        "name": "ゲオ 大曽根店",
-        "category": "geo",
-        "lat": 35.1846,
-        "lng": 136.9556,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 29,
-        "name": "マックスバリュ 徳川店",
-        "category": "aeon",
-        "lat": 35.1893,
-        "lng": 136.9393,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "5時間前",
-                "timestamp": "2026-02-21T21:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 30,
-        "name": "ローソン 名古屋白壁店",
-        "category": "conveni",
-        "lat": 35.1993,
-        "lng": 136.9495,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "20時間前",
-                "timestamp": "2026-02-21T06:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 31,
-        "name": "スギ薬局 徳川店",
-        "category": "other",
-        "lat": 35.178,
-        "lng": 136.9434,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "0時間前",
-                "timestamp": "2026-02-14T02:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 32,
-        "name": "ローソン 名古屋砂田橋店",
-        "category": "conveni",
-        "lat": 35.2011,
-        "lng": 136.9368,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "19時間前",
-                "timestamp": "2026-02-21T07:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 33,
-        "name": "ミニストップ 名古屋矢田店",
-        "category": "conveni",
-        "lat": 35.1795,
-        "lng": 136.9565,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 34,
-        "name": "エディオン 徳川店",
-        "category": "yodobashi",
-        "lat": 35.1961,
-        "lng": 136.9425,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 35,
-        "name": "ファミリーマート 名古屋大曽根店",
-        "category": "conveni",
-        "lat": 35.177,
-        "lng": 136.9621,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "18時間前",
-                "timestamp": "2026-02-21T08:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 36,
-        "name": "ローソン 名古屋泉店",
-        "category": "conveni",
-        "lat": 35.1799,
-        "lng": 136.9589,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "1時間前",
-                "timestamp": "2026-02-22T01:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 37,
-        "name": "ミニストップ 名古屋泉店",
-        "category": "conveni",
-        "lat": 35.1754,
-        "lng": 136.9406,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "16時間前",
-                "timestamp": "2026-02-21T10:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 38,
-        "name": "セブン-イレブン 名古屋徳川店",
-        "category": "conveni",
-        "lat": 35.1974,
-        "lng": 136.9468,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "12時間前",
-                "timestamp": "2026-02-21T14:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 39,
-        "name": "TSUTAYA 砂田橋店",
-        "category": "geo",
-        "lat": 35.201,
-        "lng": 136.9371,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "15時間前",
-                "timestamp": "2026-02-21T11:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 40,
-        "name": "セブン-イレブン 名古屋白壁店",
-        "category": "conveni",
-        "lat": 35.1879,
-        "lng": 136.9606,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "13時間前",
-                "timestamp": "2026-02-13T13:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 41,
-        "name": "ミニストップ 名古屋主税町店",
-        "category": "conveni",
-        "lat": 35.1986,
-        "lng": 136.9533,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 42,
-        "name": "ファミリーマート 名古屋筒井店",
-        "category": "conveni",
-        "lat": 35.1985,
-        "lng": 136.9413,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "5時間前",
-                "timestamp": "2026-02-21T21:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 43,
-        "name": "ローソン 名古屋矢田店",
-        "category": "conveni",
-        "lat": 35.1809,
-        "lng": 136.958,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "5時間前",
-                "timestamp": "2026-02-21T21:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 44,
-        "name": "ドラッグスギヤマ ナゴヤドーム前店",
-        "category": "other",
-        "lat": 35.1862,
-        "lng": 136.9608,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "14時間前",
-                "timestamp": "2026-02-13T12:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 45,
-        "name": "セブン-イレブン 名古屋主税町店",
-        "category": "conveni",
-        "lat": 35.1883,
-        "lng": 136.959,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "13時間前",
-                "timestamp": "2026-02-21T13:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 46,
-        "name": "マックスバリュ 徳川店",
-        "category": "aeon",
-        "lat": 35.1865,
-        "lng": 136.9445,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "21時間前",
-                "timestamp": "2026-02-21T05:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 47,
-        "name": "セブン-イレブン 名古屋古出来店",
-        "category": "conveni",
-        "lat": 35.1877,
-        "lng": 136.9485,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 48,
-        "name": "ミニストップ 名古屋砂田橋店",
-        "category": "conveni",
-        "lat": 35.1938,
-        "lng": 136.9419,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 49,
-        "name": "ミニストップ 名古屋大曽根店",
-        "category": "conveni",
-        "lat": 35.1795,
-        "lng": 136.9415,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "1時間前",
-                "timestamp": "2026-02-22T01:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 50,
-        "name": "ローソン 名古屋白壁店",
-        "category": "conveni",
-        "lat": 35.1996,
-        "lng": 136.9339,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 51,
-        "name": "セブン-イレブン 名古屋白壁店",
-        "category": "conveni",
-        "lat": 35.1922,
-        "lng": 136.9453,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "3時間前",
-                "timestamp": "2026-02-21T23:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 52,
-        "name": "エディオン 大曽根店",
-        "category": "yodobashi",
-        "lat": 35.1891,
-        "lng": 136.9519,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "8時間前",
-                "timestamp": "2026-02-13T18:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 53,
-        "name": "イオン 砂田橋店",
-        "category": "aeon",
-        "lat": 35.1951,
-        "lng": 136.9324,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "7時間前",
-                "timestamp": "2026-02-21T19:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 54,
-        "name": "セブン-イレブン 名古屋古出来店",
-        "category": "conveni",
-        "lat": 35.1962,
-        "lng": 136.9478,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "22時間前",
-                "timestamp": "2026-02-13T04:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 55,
-        "name": "ファミリーマート 名古屋葵店",
-        "category": "conveni",
-        "lat": 35.1858,
-        "lng": 136.96,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "18時間前",
-                "timestamp": "2026-02-13T08:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 56,
-        "name": "ミニストップ 名古屋矢田店",
-        "category": "conveni",
-        "lat": 35.18,
-        "lng": 136.9388,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "19時間前",
-                "timestamp": "2026-02-13T07:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 57,
-        "name": "ファミリーマート 名古屋徳川店",
-        "category": "conveni",
-        "lat": 35.2003,
-        "lng": 136.9541,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "14時間前",
-                "timestamp": "2026-02-21T12:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 58,
-        "name": "セブン-イレブン 名古屋筒井店",
-        "category": "conveni",
-        "lat": 35.1961,
-        "lng": 136.9424,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "20時間前",
-                "timestamp": "2026-02-21T06:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 59,
-        "name": "ローソン 名古屋筒井店",
-        "category": "conveni",
-        "lat": 35.1917,
-        "lng": 136.961,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 60,
-        "name": "ミニストップ 名古屋大曽根店",
-        "category": "conveni",
-        "lat": 35.1953,
-        "lng": 136.9615,
-        "status": "out-of-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "out-of-stock",
-                "time": "1時間前",
-                "timestamp": "2026-02-22T01:53:55.058Z",
-                "memo": "売り切れでした",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 61,
-        "name": "ミニストップ 名古屋筒井店",
-        "category": "conveni",
-        "lat": 35.1966,
-        "lng": 136.9413,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 62,
-        "name": "TSUTAYA ナゴヤドーム前店",
-        "category": "geo",
-        "lat": 35.1951,
-        "lng": 136.9466,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "10時間前",
-                "timestamp": "2026-02-21T16:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 63,
-        "name": "ミニストップ 名古屋古出来店",
-        "category": "conveni",
-        "lat": 35.1867,
-        "lng": 136.9577,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
-    },
-    {
-        "id": 64,
-        "name": "ファミリーマート 名古屋代官町店",
-        "category": "conveni",
-        "lat": 35.1756,
-        "lng": 136.9396,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "8時間前",
-                "timestamp": "2026-02-21T18:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 65,
-        "name": "ファミリーマート 名古屋古出来店",
-        "category": "conveni",
-        "lat": 35.1788,
-        "lng": 136.9494,
-        "status": "in-stock",
-        "packLimit": null,
-        "history": [
-            {
-                "status": "in-stock",
-                "time": "11時間前",
-                "timestamp": "2026-02-13T15:53:55.058Z",
-                "memo": "在庫ありました",
-                "packLimit": null
-            }
-        ]
-    },
-    {
-        "id": 66,
-        "name": "イオン 砂田橋店",
-        "category": "aeon",
-        "lat": 35.1796,
-        "lng": 136.951,
-        "status": "unknown",
-        "packLimit": null,
-        "history": []
     }
 ];

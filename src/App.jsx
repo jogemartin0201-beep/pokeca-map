@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { MapPin, Star, Zap } from 'lucide-react';
+import { MapPin, Settings } from 'lucide-react';
 import PokeMap from './components/PokeMap';
 import GachiMode from './components/GachiMode';
 import { mockStores } from './data/mockStores';
@@ -66,48 +66,37 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* Floating Header UI */}
-            <div className="floating-header">
-                <div className="floating-title-card">
-                    <MapPin className="floating-icon" size={24} />
+            {/* New macOS Floating Search Bar */}
+            <div className="floating-header-container">
+                <div className="floating-logo-section">
+                    <MapPin className="floating-icon" size={22} />
                     <h1 className="floating-title">ポケ探</h1>
+                </div>
+
+                <div className="floating-search-placeholder" onClick={() => setGachiMode(true)}>
+                    エリア・条件を設定...
                 </div>
 
                 <div className="floating-actions">
                     <button
-                        className={`floating-action-btn ${gachiMode ? 'gachi-active' : ''}`}
-                        onClick={() => {
-                            setGachiMode(!gachiMode);
-                            if (gachiMode) {
-                                setGachiRoute(null);
-                                setRouteCoords(null);
-                            }
-                        }}
-                        title="ガチ回りモード"
+                        className={`icon-btn ${gachiMode || showFavoritesOnly ? 'active' : ''}`}
+                        onClick={() => setGachiMode(true)}
+                        title="設定・ルート"
                     >
-                        <Zap size={20} />
-                    </button>
-                    <button
-                        className={`floating-action-btn ${showFavoritesOnly ? 'active' : ''}`}
-                        onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-                        title="お気に入りのみ表示"
-                    >
-                        <Star size={20} fill={showFavoritesOnly ? "white" : "none"} />
+                        <Settings size={20} />
                     </button>
                 </div>
             </div>
 
-            {/* Gachi Mode Panel */}
+            {/* Combined Settings & Gachi Mode Panel (Bottom Sheet) */}
             <GachiMode
                 isOpen={gachiMode}
-                onClose={() => {
-                    setGachiMode(false);
-                    setGachiRoute(null);
-                    setRouteCoords(null);
-                }}
+                onClose={() => setGachiMode(false)}
                 stores={stores}
                 userPos={userPos}
                 onRouteCalculated={handleRouteCalculated}
+                showFavoritesOnly={showFavoritesOnly}
+                setShowFavoritesOnly={setShowFavoritesOnly}
             />
 
             {/* Main Map Area */}

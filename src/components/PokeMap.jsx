@@ -6,9 +6,9 @@ import {
     Star, X, MapPin, ExternalLink, Car, Footprints, MessageCircle
 } from 'lucide-react';
 
-// Nagoya City center coordinates (Shifted to Higashi Ward / Nagoya Dome area for testing)
-const defaultCenter = [35.1868, 136.9472];
-const defaultZoom = 14;
+// Nagoya City center coordinates (Nagoya Station area)
+const defaultCenter = [35.1709, 136.8815];
+const defaultZoom = 13;
 
 // Fix Leaflet's default icon issue in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -31,9 +31,9 @@ function LocationMarker({ position }) {
 
     const userIcon = L.divIcon({
         className: 'custom-marker',
-        html: `<div style="width:100%;height:100%;background:#3742fa;border:3px solid white;border-radius:50%;box-shadow:0 0 0 3px rgba(55,66,250,0.3), 0 2px 8px rgba(0,0,0,0.2);"></div>`,
-        iconSize: [18, 18],
-        iconAnchor: [9, 9],
+        html: `<div style="width:100%;height:100%;background:var(--color-secondary);border:2px solid white;border-radius:50%;box-shadow:0 0 12px var(--color-secondary);"></div>`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
     });
 
     return <Marker position={position} icon={userIcon} />;
@@ -42,10 +42,11 @@ function LocationMarker({ position }) {
 // Helper: Get derived status based on history
 const getDerivedStatus = (store) => {
     if (store.status === 'no-handling') return 'no-handling';
-    if (!store.history || store.history.length === 0) return 'unknown';
+    if (!store.history || store.history.length === 0) return store.status || 'unknown';
 
     const latest = store.history[0];
     if (latest.status === 'in-stock') return 'in-stock';
+    if (latest.status === 'low-stock') return 'low-stock';
 
     // If out-of-stock, check timestamp
     if (latest.status === 'out-of-stock') {
@@ -59,35 +60,40 @@ const getDerivedStatus = (store) => {
     return 'unknown';
 };
 
-// 3-color system + gray: green (in-stock), red (out-of-stock recent), gray (unknown/undecided/no-handling)
+// 3-color system + gray: green (in-stock), orange (low-stock), red (out-of-stock recent), gray (unknown/undecided/no-handling)
 const getStatusColor = (derivedStatus) => {
     switch (derivedStatus) {
-        case 'in-stock': return '#2ed573'; // Green
-        case 'out-of-stock': return '#ff4757'; // Red/Warning
+        case 'in-stock': return 'var(--color-in-stock)'; // Neon Green
+        case 'low-stock': return 'var(--color-low-stock)'; // Neon Orange
+        case 'out-of-stock': return 'var(--color-primary)'; // Red/Warning
         case 'restock-undecided':
         case 'unknown':
         case 'no-handling':
-        default: return '#a4b0be'; // Gray
+        default: return 'var(--color-unavailable)'; // Dark Gray
     }
 };
 
 const createCustomIcon = (derivedStatus) => {
     const color = getStatusColor(derivedStatus);
     const isInStock = derivedStatus === 'in-stock';
-    const shadowExtra = isInStock ? ', 0 0 0 4px rgba(46, 213, 115, 0.2)' : '';
+    const isLowStock = derivedStatus === 'low-stock';
+
+    let shadowExtra = '';
+    if (isInStock) shadowExtra = ', var(--shadow-glow-green)';
+    if (isLowStock) shadowExtra = ', var(--shadow-glow-orange)';
 
     return L.divIcon({
         className: `custom-marker${isInStock ? ' marker-pulse' : ''}`,
         html: `<div style="
             width: 100%; height: 100%;
             background-color: ${color};
-            border: 3px solid white;
+            border: 2px solid rgba(255,255,255,0.8);
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.08)${shadowExtra};
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5)${shadowExtra};
         "></div>`,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
-        popupAnchor: [0, -16]
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        popupAnchor: [0, -14]
     });
 };
 
@@ -105,35 +111,40 @@ const formatTimeAgo = (timestamp) => {
 };
 
 const StatusBadge = ({ derivedStatus, historyTimeStr }) => {
-    const color = getStatusColor(derivedStatus);
-    let icon = <XCircle size={16} />;
+    let icon = null;
     let text = '不明';
+    let pillClass = 'status-unknown';
 
     if (derivedStatus === 'in-stock') {
-        icon = <CheckCircle size={16} />;
+        icon = <CheckCircle size={14} />;
         text = '在庫あり';
+        pillClass = 'status-in-stock';
+    } else if (derivedStatus === 'low-stock') {
+        icon = <CheckCircle size={14} />;
+        text = '残りわずか';
+        pillClass = 'status-low-stock';
     } else if (derivedStatus === 'out-of-stock') {
-        icon = <XCircle size={16} />;
+        icon = <XCircle size={14} />;
         text = '在庫なし';
+        pillClass = 'status-out-of-stock';
     } else if (derivedStatus === 'restock-undecided') {
-        icon = <XCircle size={16} />;
+        icon = <XCircle size={14} />;
         text = '入荷未定';
+        pillClass = 'status-unknown';
     } else if (derivedStatus === 'no-handling') {
-        icon = <XCircle size={16} />;
+        icon = <XCircle size={14} />;
         text = '取扱なし';
+        pillClass = 'status-unknown';
     }
 
     return (
-        <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            color: color, fontWeight: 'bold'
-        }}>
+        <div className={`status-badge-pill ${pillClass}`}>
             {icon}
             <span>
                 {text}
                 {historyTimeStr && derivedStatus !== 'no-handling' && (
-                    <span style={{ fontSize: '0.8em', marginLeft: '4px', fontWeight: 'normal' }}>
-                        ({historyTimeStr})
+                    <span style={{ fontSize: '0.85em', marginLeft: '6px', fontWeight: '500', opacity: 0.8 }}>
+                        {historyTimeStr}
                     </span>
                 )}
             </span>
@@ -195,16 +206,16 @@ function RoutePolyline({ routeCoords }) {
 
 // Share format builder
 const buildShareText = (store, derivedStatus) => {
-    let statusText = '❓ 不明';
-    if (derivedStatus === 'in-stock') statusText = '✅ 在庫あり';
-    else if (derivedStatus === 'out-of-stock') statusText = '❌ 在庫なし';
-    else if (derivedStatus === 'restock-undecided') statusText = '💤 入荷未定';
-    else if (derivedStatus === 'no-handling') statusText = '🚫 取扱なし';
+    let statusText = '【不明】';
+    if (derivedStatus === 'in-stock') statusText = '【在庫あり】';
+    else if (derivedStatus === 'out-of-stock') statusText = '【在庫なし】';
+    else if (derivedStatus === 'restock-undecided') statusText = '【入荷未定】';
+    else if (derivedStatus === 'no-handling') statusText = '【取扱なし】';
 
     const lines = [
-        '【ポケカ在庫速報】',
-        `🏪 ${store.name}`,
-        `📦 ${statusText}`,
+        'ポケカ在庫速報',
+        `店舗: ${store.name}`,
+        `状況: ${statusText}`,
         '',
         '#ポケカ #ポケ探'
     ];
@@ -296,8 +307,8 @@ export default function PokeMap({
                 zoomControl={false}
             >
                 <TileLayer
-                    attribution='&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
                 {filteredStores.map((store) => {
@@ -312,6 +323,10 @@ export default function PokeMap({
                                     setSelectedStore(store);
                                     setMemoInput('');
                                     setSelectedStatus(null);
+                                    // Smoothly pan to map marker
+                                    // Slight offset to account for bottom sheet
+                                    const map = document.querySelector('.leaflet-container')._leaflet_id;
+                                    // we can't easily access map instance here without ref, so just set state
                                 }
                             }}
                         />
@@ -363,12 +378,12 @@ export default function PokeMap({
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div style={{ marginTop: '2px', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                                                    📍 右下ボタンで現在地を取得すると距離が表示されます
+                                                <div style={{ marginTop: '2px', fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                    <Navigation size={12} /> 右下ボタンで現在地を取得すると距離が表示されます
                                                 </div>
                                             )}
                                             <div style={{ marginTop: '2px' }}>
-                                                <span className="report-badge" style={{ padding: '2px 6px', fontSize: '0.7rem' }}>📝 報告: {reportCount}件</span>
+                                                <span className="report-badge" style={{ padding: '2px 6px', fontSize: '0.7rem' }}>報告: {reportCount}件</span>
                                             </div>
                                         </div>
                                     </div>
@@ -416,15 +431,15 @@ export default function PokeMap({
                                     <div className="radio-group" style={{ marginBottom: '4px', flexWrap: 'wrap' }}>
                                         <label className={`radio-label ${selectedStatus === 'in-stock' ? 'selected-in-stock' : ''}`} style={{ padding: '6px', flex: '1 1 45%' }}>
                                             <input type="radio" value="in-stock" checked={selectedStatus === 'in-stock'} onChange={() => setSelectedStatus('in-stock')} />
-                                            ✅ 在庫あり
+                                            在庫あり
                                         </label>
                                         <label className={`radio-label ${selectedStatus === 'out-of-stock' ? 'selected-unavailable' : ''}`} style={{ padding: '6px', flex: '1 1 45%' }}>
                                             <input type="radio" value="out-of-stock" checked={selectedStatus === 'out-of-stock'} onChange={() => setSelectedStatus('out-of-stock')} />
-                                            ❌ 在庫なし
+                                            在庫なし
                                         </label>
                                         <label className={`radio-label ${selectedStatus === 'no-handling' ? 'selected-unavailable' : ''}`} style={{ padding: '4px', flex: '1 1 100%', fontSize: '0.8rem', justifyContent: 'center', backgroundColor: 'transparent', border: 'none', color: 'var(--color-text-muted)' }}>
                                             <input type="radio" value="no-handling" checked={selectedStatus === 'no-handling'} onChange={() => setSelectedStatus('no-handling')} style={{ display: 'none' }} />
-                                            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>🚫 この店舗はポケカを取り扱っていない</span>
+                                            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>この店舗はポケカを取り扱っていない</span>
                                         </label>
                                     </div>
 

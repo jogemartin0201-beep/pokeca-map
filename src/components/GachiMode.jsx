@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Zap, Footprints, Car, Clock, X, MapPin, ExternalLink } from 'lucide-react';
+import { Zap, Footprints, Car, Clock, X, MapPin, ExternalLink, Settings, Star } from 'lucide-react';
 
 // OSRM routing API
 const OSRM_BASE = 'https://router.project-osrm.org';
@@ -61,7 +61,10 @@ const solveTSP = (origin, stores) => {
     return route;
 };
 
-export default function GachiMode({ isOpen, onClose, stores, userPos, onRouteCalculated }) {
+export default function GachiMode({
+    isOpen, onClose, stores, userPos, onRouteCalculated,
+    showFavoritesOnly, setShowFavoritesOnly
+}) {
     const [travelMode, setTravelMode] = useState('foot'); // 'car' | 'foot'
     const [timeLimit, setTimeLimit] = useState(60); // minutes
     const [isCalculating, setIsCalculating] = useState(false);
@@ -248,43 +251,125 @@ export default function GachiMode({ isOpen, onClose, stores, userPos, onRouteCal
     };
 
     return (
-        <div className={`gachi-panel ${isOpen ? 'open' : ''}`}>
-            <div className="gachi-panel-header">
-                <div className="gachi-panel-title">
-                    <Zap size={18} color="#ff4757" />
-                    ガチ回りモード
-                </div>
-                <button className="side-panel-close" onClick={handleClose}>
-                    <X size={18} />
-                </button>
-            </div>
+        <>
+            {/* Background Overlay */}
+            <div className={`side-panel-overlay ${isOpen ? 'open' : ''}`} onClick={handleClose}></div>
 
-            <div className="gachi-panel-body">
-                {/* Travel mode toggle */}
-                <div className="gachi-option-group">
-                    <span className="gachi-option-label">移動手段</span>
-                    <div className="gachi-toggle-group">
-                        <button
-                            className={`gachi-toggle-btn ${travelMode === 'foot' ? 'active' : ''}`}
-                            onClick={() => setTravelMode('foot')}
-                        >
-                            <Footprints size={16} style={{ marginRight: 4, verticalAlign: 'middle' }} />
-                            徒歩
-                        </button>
-                        <button
-                            className={`gachi-toggle-btn ${travelMode === 'car' ? 'active' : ''}`}
-                            onClick={() => setTravelMode('car')}
-                        >
-                            <Car size={16} style={{ marginRight: 4, verticalAlign: 'middle' }} />
-                            車
+            <div className={`settings-bottom-sheet ${isOpen ? 'open' : ''}`}>
+                <div className="side-panel-header">
+                    <div className="side-panel-header-top">
+                        <div className="side-panel-store-info">
+                            <Settings size={22} style={{ color: 'var(--color-text-main)', marginTop: '2px' }} />
+                            <div>
+                                <h3 className="side-panel-store-name">設定・ルート検索</h3>
+                                <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                                    表示の絞り込みと、効率的な巡回ルートの計算
+                                </div>
+                            </div>
+                        </div>
+                        <button className="side-panel-close" onClick={handleClose}>
+                            <X size={20} />
                         </button>
                     </div>
                 </div>
 
-                {/* Target stores toggle */}
-                <div className="gachi-option-group" style={{ marginBottom: '16px' }}>
-                    <span className="gachi-option-label" style={{ marginBottom: '8px', display: 'block' }}>対象店舗</span>
-                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div className="side-panel-content" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+                    {/* Basic Filters (Favorites) */}
+                    <div>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 800, marginBottom: '12px', color: 'var(--color-text-main)' }}>表示フィルター</h4>
+                        <button
+                            className="btn"
+                            style={{
+                                width: '100%',
+                                justifyContent: 'flex-start',
+                                backgroundColor: showFavoritesOnly ? '#fff5e6' : 'var(--color-bg)',
+                                border: `1px solid ${showFavoritesOnly ? '#f39c12' : 'var(--color-surface-border)'}`,
+                                color: showFavoritesOnly ? '#d35400' : 'var(--color-text-main)'
+                            }}
+                            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                        >
+                            <Star size={18} fill={showFavoritesOnly ? "#f39c12" : "none"} color={showFavoritesOnly ? "#f39c12" : "currentColor"} />
+                            お気に入りの店舗のみ表示
+                        </button>
+                    </div>
+
+                    <div style={{ height: '1px', background: 'var(--color-surface-border)' }}></div>
+
+                    {/* Gachi Mode Routing */}
+                    <div>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 800, marginBottom: '16px', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Zap size={16} color="var(--color-primary)" /> ガチ回りルート計算
+                        </h4>
+
+                        {/* Travel mode toggle */}
+                        <div style={{ marginBottom: '16px' }}>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>移動手段</span>
+                            <div className="radio-group">
+                                <label className={`radio-label ${travelMode === 'foot' ? 'selected-out-of-stock' : ''}`} style={{ padding: '8px' }}>
+                                    <input type="radio" checked={travelMode === 'foot'} onChange={() => setTravelMode('foot')} />
+                                    <Footprints size={16} style={{ marginRight: 6 }} /> 徒歩
+                                </label>
+                                <label className={`radio-label ${travelMode === 'car' ? 'selected-out-of-stock' : ''}`} style={{ padding: '8px' }}>
+                                    <input type="radio" checked={travelMode === 'car'} onChange={() => setTravelMode('car')} />
+                                    <Car size={16} style={{ marginRight: 6 }} /> 車
+                                </label>
+                            </div>
+                        </div>
+                        {/* Travel mode toggle */}
+                        <div className="gachi-option-group">
+                            <span className="gachi-option-label">移動手段</span>
+                            <div className="gachi-toggle-group">
+                                <button
+                                    className={`gachi-toggle-btn ${travelMode === 'foot' ? 'active' : ''}`}
+                                    onClick={() => setTravelMode('foot')}
+                                >
+                                    <Footprints size={16} style={{ marginRight: 4, verticalAlign: 'middle' }} />
+                                    徒歩
+                                </button>
+                                <button
+                                    className={`gachi-toggle-btn ${travelMode === 'car' ? 'active' : ''}`}
+                                    onClick={() => setTravelMode('car')}
+                                >
+                                    <Car size={16} style={{ marginRight: 4, verticalAlign: 'middle' }} />
+                                    車
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Target stores toggle */}
+                        <div style={{ marginBottom: '16px' }}>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '8px', display: 'block' }}>ルート対象店舗</span>
+                            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', cursor: 'pointer', fontWeight: 600 }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={statusFilters.inStock}
+                                        onChange={(e) => setStatusFilters(prev => ({ ...prev, inStock: e.target.checked }))}
+                                        style={{ accentColor: 'var(--color-in-stock)', width: '16px', height: '16px' }}
+                                    />
+                                    在庫あり
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', cursor: 'pointer', fontWeight: 500, color: 'var(--color-text-muted)' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={statusFilters.unknown}
+                                        onChange={(e) => setStatusFilters(prev => ({ ...prev, unknown: e.target.checked }))}
+                                        style={{ accentColor: 'var(--color-unavailable)', width: '16px', height: '16px' }}
+                                    />
+                                    不明
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', cursor: 'pointer', fontWeight: 500, color: 'var(--color-text-muted)' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={statusFilters.restockUndecided}
+                                        onChange={(e) => setStatusFilters(prev => ({ ...prev, restockUndecided: e.target.checked }))}
+                                        style={{ accentColor: 'var(--color-unavailable)', width: '16px', height: '16px' }}
+                                    />
+                                    入荷未定
+                                </label>
+                            </div>
+                        </div>
                         <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', cursor: 'pointer' }}>
                             <input
                                 type="checkbox"
@@ -335,7 +420,8 @@ export default function GachiMode({ isOpen, onClose, stores, userPos, onRouteCal
 
                 {/* Calculate button */}
                 <button
-                    className="gachi-start-btn"
+                    className="btn btn-primary"
+                    style={{ width: '100%', marginTop: '8px' }}
                     onClick={routeResult ? clearRoute : calculateRoute}
                     disabled={isCalculating}
                 >
@@ -343,7 +429,7 @@ export default function GachiMode({ isOpen, onClose, stores, userPos, onRouteCal
                 </button>
 
                 {error && (
-                    <div style={{ fontSize: '0.85rem', color: '#ff4757', textAlign: 'center', padding: '4px 0' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--color-primary)', textAlign: 'center', padding: '8px 0', fontWeight: 600 }}>
                         {error}
                     </div>
                 )}
@@ -351,32 +437,34 @@ export default function GachiMode({ isOpen, onClose, stores, userPos, onRouteCal
 
             {/* Route results */}
             {routeResult && routeResult.stores.length > 0 && (
-                <div className="gachi-result">
-                    <div className="gachi-result-title">
-                        <MapPin size={14} style={{ marginRight: 4, verticalAlign: 'middle' }} />
+                <div style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: 'var(--radius-md)' }}>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 800, marginBottom: '12px', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <MapPin size={16} color="var(--color-primary)" />
                         ルート（{routeResult.stores.length}店舗）
                     </div>
-                    <ul className="gachi-route-list">
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                         {routeResult.stores.map((s, i) => (
-                            <li key={s.storeId} className="gachi-route-item">
-                                <span className="gachi-route-number">{i + 1}</span>
-                                <span className="gachi-route-store">{s.name}</span>
-                                <span className="gachi-route-time">{s.legTime}分</span>
+                            <li key={s.storeId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem', padding: '6px 0', borderBottom: '1px solid var(--color-surface-border)' }}>
+                                <span style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                    <span style={{ background: 'var(--color-text-main)', color: 'white', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 800 }}>{i + 1}</span>
+                                    <span style={{ fontWeight: 600 }}>{s.name}</span>
+                                </span>
+                                <span style={{ color: 'var(--color-text-muted)' }}>{s.legTime}分</span>
                             </li>
                         ))}
                     </ul>
-                    <div className="gachi-total">
-                        合計: 約{routeResult.totalDuration}分 / {routeResult.totalDistance}km (購入時間含む)
+                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-main)', marginBottom: '16px', textAlign: 'right' }}>
+                        合計: 約{routeResult.totalDuration}分 / {routeResult.totalDistance}km <span style={{ color: 'var(--color-text-muted)', fontWeight: 500 }}>(購入時間含む)</span>
                     </div>
                     <button
-                        className="btn btn-primary"
+                        className="btn"
                         onClick={openGoogleMaps}
-                        style={{ width: '100%', marginTop: '12px', padding: '10px', fontSize: '0.9rem' }}
+                        style={{ width: '100%', background: 'white', border: '1px solid var(--color-surface-border)', color: 'var(--color-text-main)' }}
                     >
-                        <ExternalLink size={16} /> Googleマップでルートを開く
+                        <ExternalLink size={16} style={{ marginRight: 6 }} /> Google Mapsで開く
                     </button>
                 </div>
             )}
-        </div>
+        </>
     );
 }
